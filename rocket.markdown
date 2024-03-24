@@ -1,5 +1,4 @@
-![](assets/image1.png){width="6.0in"
-height="1.4097222222222223in"}
+![](assets/image1.png)
 
 > ![](assets/image2.png){width="3.75in"
 > height="3.75in"}
