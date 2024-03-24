@@ -1,7 +1,6 @@
 ![](assets/image1.png)
 
-> ![](assets/image2.png){width="3.75in"
-> height="3.75in"}
+> ![](assets/image2.png)
 >
 > **Synopsis (!)**
 >
@@ -100,16 +99,14 @@ contents of an intent used to launch a new component in the context of a
 >
 > (You need to download the Bundle tool if it does not exist):
 >
-> ![](assets/image3.png){width="6.405555555555556in"
-> height="0.23472112860892388in"}
+> ![](assets/image3.png)
 >
 > Once the rockets.apks file is generated, we need to **change the
 > file's extension**
 >
 > **from rockets.apks to rockets.zip:**
 >
-> ![](assets/image4.png){width="5.677777777777778in"
-> height="0.3333333333333333in"}
+> ![](assets/image4.png)
 >
 > Unzip the rockets.zip file and the APK we need is the
 > **universal.apk** inside the rockets folder.
@@ -118,45 +115,38 @@ contents of an intent used to launch a new component in the context of a
 > can see is the login which needs credentials, so there is nothing else
 > to do here.
 >
-> ![](assets/image5.png){width="2.2916666666666665in"
-> height="4.074998906386702in"}
+> ![](assets/image5.png)
 >
 > Let's dive into the code!
 >
 > First, we should decompile the APK to get a better picture (Download
 > the apktool if it does not exist):
 >
-> ![](assets/image6.png){width="5.030555555555556in"
-> height="0.25in"}
+> ![](assets/image6.png)
 >
 > Use the jadx tool to analyze the code:
 >
-> ![](assets/image7.png){width="3.4472222222222224in"
-> height="0.22916666666666666in"}
+> ![](assets/image7.png)
 >
 > Once the jadx tool opens, we select the project that we decompiled:
 >
-> ![](assets/image8.png){width="4.754166666666666in"
-> height="2.811111111111111in"}
+> ![](assets/image8.png)
 >
 > We can see that there are 3 activities. (LoginActivity,
 > RocketsActivity, and RocketDetailActivity):
 
-![](assets/image9.png){width="6.0in"
-height="2.0569433508311463in"}
+![](assets/image9.png)
 
 > Let's look inside the Login Activity:
 
-![](assets/image10.png){width="6.0in"
-height="2.9972222222222222in"}
+![](assets/image10.png
 
 > There is a button that does some work when clicked. It looks like it
 > calls a function **d2.a.** If we navigate there, we can see an
 > interesting piece of code that checks a condition to start an
 > activity.
 
-![](assets/image11.png){width="6.0in"
-height="2.997221128608924in"}
+![](assets/image11.png)
 
 > Potentially, if we modify the condition, we could break into the app.
 >
@@ -168,16 +158,14 @@ height="2.997221128608924in"}
 >
 > So, let's take a look at the Rockets List Activity:
 
-![](assets/image12.png){width="6.0in"
-height="2.9972222222222222in"}
+![](assets/image12.png)
 
 > It seems that sets a recycler view but still does not contain
 > something interesting.
 >
 > Lastly, the Details List Activity:
 
-![](assets/image13.png){width="6.0in"
-height="2.9972222222222222in"}
+![](assets/image13.png)
 
 > There is a piece of code at the end of the activity that defines a
 > textView with more details, but before defining checks a condition.
@@ -203,8 +191,7 @@ height="2.9972222222222222in"}
 > can launch the\
 > ).
 
-![](assets/image14.png){width="6.0in"
-height="1.5166655730533682in"}
+![](assets/image14.png)
 
 > The android:exported attribute seems to be declared as true in the
 > Login Activity. This is justified as login activity is the first
@@ -229,8 +216,7 @@ height="1.5166655730533682in"}
 >
 > The main activity of the attacker's app:
 
-![](assets/image15.png){width="6.0in"
-height="3.5722222222222224in"}
+![](assets/image15.png)
 
 > •We declare a constant variable as the package name we target to make
 > the intent.
@@ -244,22 +230,19 @@ height="3.5722222222222224in"}
 >
 > The main activity XML file represents the UI:
 >
-> ![](assets/image16.png){width="5.206944444444445in"
-> height="2.554165573053368in"}
+> ![](assets/image16.png)
 >
 > We only added a button there. That's all! Let's run the attacker's app
 > and click the button.
 >
 > The Rockets Activity opens, containing a list of rockets:
 >
-> ![](assets/image17.png){width="2.066666666666667in"
-> height="3.672222222222222in"}
+> ![](assets/image17.png)
 >
 > Even if the user clicks on each rocket, they only are navigated to a
 > details screen:
 >
-> ![](assets/image18.png){width="2.0569444444444445in"
-> height="3.6555555555555554in"}
+> ![](assets/image18.png)
 >
 > Nothing interesting on either screen. But if we analyze the details
 > screen a bit, we can see that the UI consisted of 3 elements. An
@@ -274,56 +257,47 @@ height="3.5722222222222224in"}
 > Let's work with the case we found in the Rocket Detail Activity
 > previously:
 >
-> ![](assets/image19.png){width="5.15in"
-> height="2.573611111111111in"}
+> ![](assets/image19.png)
 >
 > We can try to modify this if condition or boolean to see what value is
 > filled in textView3.
 >
 > First, we open the VS code to see the SMALI classes:
 
-![](assets/image20.png){width="6.0in"
-height="0.5944444444444444in"}
+![](assets/image20.png)
 
 > When the VS code opens, we navigate to the RocketDetailScreen:
 
-![](assets/image21.png){width="6.0in"
-height="2.9972222222222222in"}
+![](assets/image21.png)
 
 > We can either modify the Boolean flag:
 
-![](assets/image22.png){width="6.0in"
-height="1.1902777777777778in"}
+![](assets/image22.png)
 
 > Or the if condition:
 
-![](assets/image23.png){width="6.0in"
-height="1.0180555555555555in"}
+![](assets/image23.png)
 
 > We worked with the second case and changed the condition to **if-nez**
 > to achieve the opposite result and the textView3 to be defined.
 >
 > Now we need to save the change and rebuild the APK:
 >
-> ![](assets/image24.png){width="5.375in"
-> height="1.6124989063867017in"}
+> ![](assets/image24.png)
 >
 > If any error occurs as above, a new version of apktool should be
 > installed and run the command:
 
-![](assets/image25.png){width="6.0in"
-height="0.22777777777777777in"}
+![](assets/image25.png)
 
 > The next step is to sign this APK.\
 > First, we create a new keystore:
 
-![](assets/image26.png){width="6.0in"
-height="2.1638877952755906in"}
+![](assets/image26.png)
 
 > Then, we sign the modified APK:
 
-![](assets/image27.png){width="6.0in"
-height="0.4in"}
+![](assets/image27.png)
 
 > We enter the passphrase we defined on the keystore's creation.
 >
@@ -332,8 +306,7 @@ height="0.4in"}
 >
 > Surprisingly, when we tried to install there is another error:
 >
-> ![](assets/image28.png){width="3.5in"
-> height="1.1138877952755906in"}
+> ![](assets/image28.png)
 >
 > This happens because the challenge flag was secured with a native
 > library. More info abou\
@@ -344,8 +317,7 @@ height="0.4in"}
 > We open again the decompiled folder called universal and open the
 > AndroidManifest.xml file:
 
-![](assets/image29.png){width="6.0in"
-height="2.959722222222222in"}
+![](assets/image29.png)
 
 > All we have to do is to change android:extractNativeLibs from false to
 > true.
@@ -360,5 +332,4 @@ height="2.959722222222222in"}
 >
 > Get the flag:
 >
-> ![](assets/image30.png){width="2.102777777777778in"
-> height="3.738888888888889in"}
+> ![](assets/image30.png)
