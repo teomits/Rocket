@@ -1,4 +1,4 @@
-![](vertopal_b88fb1ecf8cd49bdb7af19035f216a87/media/image1.png){width="6.0in"
+![](assets/image1.png){width="6.0in"
 height="1.4097222222222223in"}
 
 > ![](vertopal_b88fb1ecf8cd49bdb7af19035f216a87/media/image2.png){width="3.75in"
