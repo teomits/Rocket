@@ -1,7 +1,7 @@
 ![](assets/image1.png){width="6.0in"
 height="1.4097222222222223in"}
 
-> ![](vertopal_b88fb1ecf8cd49bdb7af19035f216a87/media/image2.png){width="3.75in"
+> ![](assets/image2.png){width="3.75in"
 > height="3.75in"}
 >
 > **Synopsis (!)**
@@ -101,7 +101,7 @@ contents of an intent used to launch a new component in the context of a
 >
 > (You need to download the Bundle tool if it does not exist):
 >
-> ![](vertopal_b88fb1ecf8cd49bdb7af19035f216a87/media/image3.png){width="6.405555555555556in"
+> ![](assets/image3.png){width="6.405555555555556in"
 > height="0.23472112860892388in"}
 >
 > Once the rockets.apks file is generated, we need to **change the
@@ -109,7 +109,7 @@ contents of an intent used to launch a new component in the context of a
 >
 > **from rockets.apks to rockets.zip:**
 >
-> ![](vertopal_b88fb1ecf8cd49bdb7af19035f216a87/media/image4.png){width="5.677777777777778in"
+> ![](assets/image4.png){width="5.677777777777778in"
 > height="0.3333333333333333in"}
 >
 > Unzip the rockets.zip file and the APK we need is the
@@ -119,7 +119,7 @@ contents of an intent used to launch a new component in the context of a
 > can see is the login which needs credentials, so there is nothing else
 > to do here.
 >
-> ![](vertopal_b88fb1ecf8cd49bdb7af19035f216a87/media/image5.png){width="2.2916666666666665in"
+> ![](assets/image5.png){width="2.2916666666666665in"
 > height="4.074998906386702in"}
 >
 > Let's dive into the code!
@@ -127,28 +127,28 @@ contents of an intent used to launch a new component in the context of a
 > First, we should decompile the APK to get a better picture (Download
 > the apktool if it does not exist):
 >
-> ![](vertopal_b88fb1ecf8cd49bdb7af19035f216a87/media/image6.png){width="5.030555555555556in"
+> ![](assets/image6.png){width="5.030555555555556in"
 > height="0.25in"}
 >
 > Use the jadx tool to analyze the code:
 >
-> ![](vertopal_b88fb1ecf8cd49bdb7af19035f216a87/media/image7.png){width="3.4472222222222224in"
+> ![](assets/image7.png){width="3.4472222222222224in"
 > height="0.22916666666666666in"}
 >
 > Once the jadx tool opens, we select the project that we decompiled:
 >
-> ![](vertopal_b88fb1ecf8cd49bdb7af19035f216a87/media/image8.png){width="4.754166666666666in"
+> ![](assets/image8.png){width="4.754166666666666in"
 > height="2.811111111111111in"}
 >
 > We can see that there are 3 activities. (LoginActivity,
 > RocketsActivity, and RocketDetailActivity):
 
-![](vertopal_b88fb1ecf8cd49bdb7af19035f216a87/media/image9.png){width="6.0in"
+![](assets/image9.png){width="6.0in"
 height="2.0569433508311463in"}
 
 > Let's look inside the Login Activity:
 
-![](vertopal_b88fb1ecf8cd49bdb7af19035f216a87/media/image10.png){width="6.0in"
+![](assets/image10.png){width="6.0in"
 height="2.9972222222222222in"}
 
 > There is a button that does some work when clicked. It looks like it
@@ -156,7 +156,7 @@ height="2.9972222222222222in"}
 > interesting piece of code that checks a condition to start an
 > activity.
 
-![](vertopal_b88fb1ecf8cd49bdb7af19035f216a87/media/image11.png){width="6.0in"
+![](assets/image11.png){width="6.0in"
 height="2.997221128608924in"}
 
 > Potentially, if we modify the condition, we could break into the app.
@@ -169,7 +169,7 @@ height="2.997221128608924in"}
 >
 > So, let's take a look at the Rockets List Activity:
 
-![](vertopal_b88fb1ecf8cd49bdb7af19035f216a87/media/image12.png){width="6.0in"
+![](assets/image12.png){width="6.0in"
 height="2.9972222222222222in"}
 
 > It seems that sets a recycler view but still does not contain
@@ -177,7 +177,7 @@ height="2.9972222222222222in"}
 >
 > Lastly, the Details List Activity:
 
-![](vertopal_b88fb1ecf8cd49bdb7af19035f216a87/media/image13.png){width="6.0in"
+![](assets/image13.png){width="6.0in"
 height="2.9972222222222222in"}
 
 > There is a piece of code at the end of the activity that defines a
@@ -204,7 +204,7 @@ height="2.9972222222222222in"}
 > can launch the\
 > ).
 
-![](vertopal_b88fb1ecf8cd49bdb7af19035f216a87/media/image14.png){width="6.0in"
+![](assets/image14.png){width="6.0in"
 height="1.5166655730533682in"}
 
 > The android:exported attribute seems to be declared as true in the
@@ -230,7 +230,7 @@ height="1.5166655730533682in"}
 >
 > The main activity of the attacker's app:
 
-![](vertopal_b88fb1ecf8cd49bdb7af19035f216a87/media/image15.png){width="6.0in"
+![](assets/image15.png){width="6.0in"
 height="3.5722222222222224in"}
 
 > •We declare a constant variable as the package name we target to make
@@ -245,7 +245,7 @@ height="3.5722222222222224in"}
 >
 > The main activity XML file represents the UI:
 >
-> ![](vertopal_b88fb1ecf8cd49bdb7af19035f216a87/media/image16.png){width="5.206944444444445in"
+> ![](assets/image16.png){width="5.206944444444445in"
 > height="2.554165573053368in"}
 >
 > We only added a button there. That's all! Let's run the attacker's app
@@ -253,13 +253,13 @@ height="3.5722222222222224in"}
 >
 > The Rockets Activity opens, containing a list of rockets:
 >
-> ![](vertopal_b88fb1ecf8cd49bdb7af19035f216a87/media/image17.png){width="2.066666666666667in"
+> ![](assets/image17.png){width="2.066666666666667in"
 > height="3.672222222222222in"}
 >
 > Even if the user clicks on each rocket, they only are navigated to a
 > details screen:
 >
-> ![](vertopal_b88fb1ecf8cd49bdb7af19035f216a87/media/image18.png){width="2.0569444444444445in"
+> ![](assets/image18.png){width="2.0569444444444445in"
 > height="3.6555555555555554in"}
 >
 > Nothing interesting on either screen. But if we analyze the details
@@ -275,7 +275,7 @@ height="3.5722222222222224in"}
 > Let's work with the case we found in the Rocket Detail Activity
 > previously:
 >
-> ![](vertopal_b88fb1ecf8cd49bdb7af19035f216a87/media/image19.png){width="5.15in"
+> ![](assets/image19.png){width="5.15in"
 > height="2.573611111111111in"}
 >
 > We can try to modify this if condition or boolean to see what value is
@@ -283,22 +283,22 @@ height="3.5722222222222224in"}
 >
 > First, we open the VS code to see the SMALI classes:
 
-![](vertopal_b88fb1ecf8cd49bdb7af19035f216a87/media/image20.png){width="6.0in"
+![](assets/image20.png){width="6.0in"
 height="0.5944444444444444in"}
 
 > When the VS code opens, we navigate to the RocketDetailScreen:
 
-![](vertopal_b88fb1ecf8cd49bdb7af19035f216a87/media/image21.png){width="6.0in"
+![](assets/image21.png){width="6.0in"
 height="2.9972222222222222in"}
 
 > We can either modify the Boolean flag:
 
-![](vertopal_b88fb1ecf8cd49bdb7af19035f216a87/media/image22.png){width="6.0in"
+![](assets/image22.png){width="6.0in"
 height="1.1902777777777778in"}
 
 > Or the if condition:
 
-![](vertopal_b88fb1ecf8cd49bdb7af19035f216a87/media/image23.png){width="6.0in"
+![](assets/image23.png){width="6.0in"
 height="1.0180555555555555in"}
 
 > We worked with the second case and changed the condition to **if-nez**
@@ -306,24 +306,24 @@ height="1.0180555555555555in"}
 >
 > Now we need to save the change and rebuild the APK:
 >
-> ![](vertopal_b88fb1ecf8cd49bdb7af19035f216a87/media/image24.png){width="5.375in"
+> ![](assets/image24.png){width="5.375in"
 > height="1.6124989063867017in"}
 >
 > If any error occurs as above, a new version of apktool should be
 > installed and run the command:
 
-![](vertopal_b88fb1ecf8cd49bdb7af19035f216a87/media/image25.png){width="6.0in"
+![](assets/image25.png){width="6.0in"
 height="0.22777777777777777in"}
 
 > The next step is to sign this APK.\
 > First, we create a new keystore:
 
-![](vertopal_b88fb1ecf8cd49bdb7af19035f216a87/media/image26.png){width="6.0in"
+![](assets/image26.png){width="6.0in"
 height="2.1638877952755906in"}
 
 > Then, we sign the modified APK:
 
-![](vertopal_b88fb1ecf8cd49bdb7af19035f216a87/media/image27.png){width="6.0in"
+![](assets/image27.png){width="6.0in"
 height="0.4in"}
 
 > We enter the passphrase we defined on the keystore's creation.
@@ -333,7 +333,7 @@ height="0.4in"}
 >
 > Surprisingly, when we tried to install there is another error:
 >
-> ![](vertopal_b88fb1ecf8cd49bdb7af19035f216a87/media/image28.png){width="3.5in"
+> ![](assets/image28.png){width="3.5in"
 > height="1.1138877952755906in"}
 >
 > This happens because the challenge flag was secured with a native
@@ -345,7 +345,7 @@ height="0.4in"}
 > We open again the decompiled folder called universal and open the
 > AndroidManifest.xml file:
 
-![](vertopal_b88fb1ecf8cd49bdb7af19035f216a87/media/image29.png){width="6.0in"
+![](assets/image29.png){width="6.0in"
 height="2.959722222222222in"}
 
 > All we have to do is to change android:extractNativeLibs from false to
@@ -361,5 +361,5 @@ height="2.959722222222222in"}
 >
 > Get the flag:
 >
-> ![](vertopal_b88fb1ecf8cd49bdb7af19035f216a87/media/image30.png){width="2.102777777777778in"
+> ![](assets/image30.png){width="2.102777777777778in"
 > height="3.738888888888889in"}
