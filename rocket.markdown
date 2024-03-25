@@ -12,6 +12,9 @@ Difficulty: <font color='red'>Hard</font>
 
 <br><br>
 
+
+
+
 # Synopsis (!)
 
 Firstly, the user should grab the APK file from an AAB format. AABs are a type of 
