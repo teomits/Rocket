@@ -69,36 +69,22 @@ can be accessed by third-party apps.
 
 **Analyzing the source code (\*)**
 
-Once the user unzips the file, they will find the app in AAB format
-(Android app
+Once the user unzips the file, they will find the app in AAB format (Android app bundle).
+AABs are a type of Android file used to publish and distribute Android apps. They are now the
+standard file format used to publish Android apps on the Google Play Store.
+More info here(https://developer.android.com/guide/app-bundle/app-bundle-format)
 
-bundle). AABs are a type of Android file used to publish and
-distribute Android
-
-apps. They are now the standard file format used to publish Android
-apps on the
-
-Google Play Store. More info
-here(https://developer.android.com/guide/app-
-
-bundle/app-bundle-format)
-
-Therefore, the first step is to grab the APK from the AAB file with
-the Bundle tool
-
+Therefore, the first step is to grab the APK from the AAB file with the Bundle tool 
 (You need to download the Bundle tool if it does not exist):
 
 ![](assets/image3.png)
 
-Once the rockets.apks file is generated, we need to **change the
-file's extension**
-
-**from rockets.apks to rockets.zip:**
+Once the rockets.apks file is generated, we need to **change the 
+file's extension from rockets.apks to rockets.zip:**
 
 ![](assets/image4.png)
 
-Unzip the rockets.zip file and the APK we need is the
-**universal.apk** inside the rockets folder.
+Unzip the rockets.zip file and the APK we need is the **universal.apk** inside the rockets folder.
 
 We can now install the APK to navigate in the app. The only screen we
 can see is the login which needs credentials, so there is nothing else
@@ -108,8 +94,7 @@ to do here.
 
 Let's dive into the code!
 
-First, we should decompile the APK to get a better picture (Download
-the apktool if it does not exist):
+First, we should decompile the APK to get a better picture (Download the apktool if it does not exist):
 
 ![](assets/image6.png)
 
@@ -121,61 +106,47 @@ Once the jadx tool opens, we select the project that we decompiled:
 
 ![](assets/image8.png)
 
-We can see that there are 3 activities. (LoginActivity,
-RocketsActivity, and RocketDetailActivity):
+We can see that there are 3 activities. (LoginActivity, RocketsActivity, and RocketDetailActivity):
 
 ![](assets/image9.png)
 
 Let's look inside the Login Activity:
 
-![](assets/image10.png
+![](assets/image10.png)
 
-There is a button that does some work when clicked. It looks like it
-calls a function **d2.a.** If we navigate there, we can see an
-interesting piece of code that checks a condition to start an
-activity.
+There is a button that does some work when clicked. It looks like it calls a function **d2.a.**
+If we navigate there, we can see an interesting piece of code that checks a condition to start an activity.
 
 ![](assets/image11.png)
 
 Potentially, if we modify the condition, we could break into the app.
 
-However, if we are more careful, we can see that the last line inside
-the if condition does nothing. It just tries to start an activity with
-a new Intent empty. This won\'t work. Therefore, even if we could find
-the credentials, we wouldn't be able to get past the login wall
-because this intent does nothing.
+However, if we are more careful, we can see that the last line inside the if condition does nothing.
+It just tries to start an activity with a new Intent empty. This won\'t work. Therefore, even if we could find the credentials,
+we wouldn't be able to get past the login wall because this intent does nothing.
 
 So, let's take a look at the Rockets List Activity:
 
 ![](assets/image12.png)
 
-It seems that sets a recycler view but still does not contain
-something interesting.
+It seems that sets a recycler view but still does not contain something interesting.
 
 Lastly, the Details List Activity:
 
 ![](assets/image13.png)
 
-There is a piece of code at the end of the activity that defines a
-textView with more details, but before defining checks a condition.
-There is also a hardcoded string
-
-there called "**secret**". We could try to work with this case but
-still, we do not have access to this activity to modify the code and
-check the results, as we are blocked by the login wall.
+There is a piece of code at the end of the activity that defines a textView with more details, but before defining checks a condition.
+There is also a hardcoded string there called "**secret**". We could try to work with this case but still, we do not have access to this
+activity to modify the code and check the results, as we are blocked by the login wall.
 
 **Solution (!)**
 
 **Finding the vulnerability (\*)**
 
-Let's take another approach and take a look at the AndroidManifest.xml
-file. Indeed, there are 3 activities declared there. If we look
-carefully there is an attribute **android:exported** declared on each
-activity. The android:exported attribute sets whether a
-component(activity, service, broadcast reaceiver, etc.) can be
-launched by components of other applications. If true, any app can
-access the activity and launch it by its exact class name. If false,
-only components of the same application,\
+Let's take another approach and take a look at the AndroidManifest.xml file. Indeed, there are 3 activities declared there.
+If we look carefully there is an attribute **android:exported** declared on each activity. The android:exported attribute sets whether a 
+component(activity, service, broadcast reaceiver, etc.) can be launched by components of other applications. If true, any app can access the
+activity and launch it by its exact class name. If false, only components of the same application,\
 applications with the same user ID, or privileged system components
 can launch the\
 ).
