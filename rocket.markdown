@@ -146,45 +146,35 @@ activity to modify the code and check the results, as we are blocked by the logi
 Let's take another approach and take a look at the AndroidManifest.xml file. Indeed, there are 3 activities declared there.
 If we look carefully there is an attribute **android:exported** declared on each activity. The android:exported attribute sets whether a 
 component(activity, service, broadcast reaceiver, etc.) can be launched by components of other applications. If true, any app can access the
-activity and launch it by its exact class name. If false, only components of the same application,\
-applications with the same user ID, or privileged system components
-can launch the\
-).
+activity and launch it by its exact class name. If false, only components of the same application, applications with the same user ID, or privileged system components
+can launch the activity. More info here (https://developer.android.com/privacy-and-security/risks/android-exported).
 
 ![](assets/image14.png)
 
-The android:exported attribute seems to be declared as true in the
-Login Activity. This is justified as login activity is the first
-screen when the app launches. However, android:exported attribute has
-also been declared as true in Rockets Activity. **This means that we
-could bypass the login screen if we make an intent to Rockets Activity
-directly.**
+The android:exported attribute seems to be declared as true in the Login Activity. This is justified as login activity is the first screen when the app launches.
+However, android:exported attribute has also been declared as true in Rockets Activity. **This means that we could bypass the login screen if we make an intent to 
+Rockets Activity directly.**
 
 **Exploitation (!)**
 
-Therefore, the next step is to **create an attacker app that will send
-an intent to the vulnerable app.**
+Therefore, the next step is to **create an attacker app that will send an intent to the vulnerable app.**
 
 **Creating the attacker app (\*)**
 
 First, we open the Android studio and create a new project.
 
-The attacker's app UI will contain only one activity and a single
-button in it. Upon clicking the button, the app will send an Intent to
-the vulnerable app and try to open the Rockets activity declaring the
-right path.
+The attacker's app UI will contain only one activity and a single button in it. Upon clicking the button, the app will send an Intent to the vulnerable app and
+try to open the Rockets activity declaring the right path.
 
 The main activity of the attacker's app:
 
 ![](assets/image15.png)
 
-•We declare a constant variable as the package name we target to make
-the intent.
+•We declare a constant variable as the package name we target to make the intent.
 
 •We set up an onClickListener for the button.
 
-•Inside the listener, we create the intent and set the component of
-the vulnerable path.
+•Inside the listener, we create the intent and set the component of the vulnerable path.
 
 •Start the activity-component.
 
@@ -192,35 +182,27 @@ The main activity XML file represents the UI:
 
 ![](assets/image16.png)
 
-We only added a button there. That's all! Let's run the attacker's app
-and click the button.
+We only added a button there. That's all! Let's run the attacker's app and click the button.
 
 The Rockets Activity opens, containing a list of rockets:
 
 ![](assets/image17.png)
 
-Even if the user clicks on each rocket, they only are navigated to a
-details screen:
+Even if the user clicks on each rocket, they only are navigated to a details screen:
 
 ![](assets/image18.png)
 
-Nothing interesting on either screen. But if we analyze the details
-screen a bit, we can see that the UI consisted of 3 elements. An
-imageView and 2 textViews.
+Nothing interesting on either screen. But if we analyze the details screen a bit, we can see that the UI consisted of 3 elements. An imageView and 2 textViews.
 
-Previously we found in the RocketDetailActivity a case that defined a
-textView3 with more details. **Thus, there is one more textView which
-is hidden.**
+Previously we found in the RocketDetailActivity a case that defined a textView3 with more details. **Thus, there is one more textView which is hidden.**
 
 **Getting the flag (!)**
 
-Let's work with the case we found in the Rocket Detail Activity
-previously:
+Let's work with the case we found in the Rocket Detail Activity previously:
 
 ![](assets/image19.png)
 
-We can try to modify this if condition or boolean to see what value is
-filled in textView3.
+We can try to modify this if condition or boolean to see what value is filled in textView3.
 
 First, we open the VS code to see the SMALI classes:
 
@@ -238,19 +220,17 @@ Or the if condition:
 
 ![](assets/image23.png)
 
-We worked with the second case and changed the condition to **if-nez**
-to achieve the opposite result and the textView3 to be defined.
+We worked with the second case and changed the condition to **if-nez** to achieve the opposite result and the textView3 to be defined.
 
 Now we need to save the change and rebuild the APK:
 
 ![](assets/image24.png)
 
-If any error occurs as above, a new version of apktool should be
-installed and run the command:
+If any error occurs as above, a new version of apktool should be installed and run the command:
 
 ![](assets/image25.png)
 
-The next step is to sign this APK.\
+The next step is to sign this APK.
 First, we create a new keystore:
 
 ![](assets/image26.png)
@@ -261,25 +241,20 @@ Then, we sign the modified APK:
 
 We enter the passphrase we defined on the keystore's creation.
 
-Finally, after deleting the previous APK from the emulator or device,
-we install the modified APK.
+Finally, after deleting the previous APK from the emulator or device, we install the modified APK.
 
 Surprisingly, when we tried to install there is another error:
 
 ![](assets/image28.png)
 
-This happens because the challenge flag was secured with a native
-library. More info abouhere)\
-Therefore, to be able to install the application we should modify an
-attribute inside the AndroidManifest.xml file.
+This happens because the challenge flag was secured with a native library. More info about how the challenge flag was secured can be found here(https://www.codementor.io/blog/kotlin-apikeys-7o0g54qk5b).
+Therefore, to be able to install the application we should modify an attribute inside the AndroidManifest.xml file.
 
-We open again the decompiled folder called universal and open the
-AndroidManifest.xml file:
+We open again the decompiled folder called universal and open the AndroidManifest.xml file:
 
 ![](assets/image29.png)
 
-All we have to do is to change android:extractNativeLibs from false to
-true.
+All we have to do is to change android:extractNativeLibs from false to true.
 
 Save the change, build, and sign the APK as we did previously.
 
