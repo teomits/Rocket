@@ -17,7 +17,7 @@ Difficulty: <font color='red'>Hard</font>
 Firstly, the user should grab the APK file from an AAB format. AABs are a type of 
 Android file used to publish and distribute Android apps. They are now the standard file
 format used to publish Android apps on the Google Play Store. More info 
-here(https://developer.android.com/guide/app-bundle/app-bundle-format).
+here (https://developer.android.com/guide/app-bundle/app-bundle-format).
 Once the user gets the APK file, the first step is to decompile it.
 They will soon realize that the login screen is not functional yet, so
 the next step is to bypass the Login Activity using the Intent\
