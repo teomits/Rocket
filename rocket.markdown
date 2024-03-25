@@ -1,16 +1,18 @@
 ![img](assets/image1.png)
 
-<img src='assets/image2.png' style='zoom: 80%;' align=left /> <font size='10'><Rocket></font>
+<img src='assets/image2.png' style='zoom: 80%;' align=left /> <font size='10'>Rocket</font>
 
 25 March 2024
 
-Prepared By: `<0xFF>`
+Prepared By: 0xFF
 
-Challenge Author(s): `<0xFF>`
+Challenge Author(s): 0xFF
 
 Difficulty: <font color='red'>Hard</font>
 
 <br><br>
+
+
 
 **Synopsis (!)**
 
