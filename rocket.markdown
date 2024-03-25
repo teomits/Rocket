@@ -12,9 +12,7 @@ Difficulty: <font color='red'>Hard</font>
 
 <br><br>
 
-
-
-**Synopsis (!)**
+# Synopsis (!)
 
 Firstly, the user should grab the APK file from an AAB format. AABs are a type of 
 Android file used to publish and distribute Android apps. They are now the standard file
@@ -29,7 +27,7 @@ rocket click will navigate the user to a details screen. After
 analyzing the Rocket Details Activity, the user should modify the APK
 to get the secret flag.
 
-**Description (!)**
+## Description (!)
 
 • This challenge is about Intent Redirection vulnerability in Android
 apps. An intent redirection occurs when an attacker can partly or fully control
@@ -37,7 +35,7 @@ the contents of an intent used to launch a new component in the context of a
 vulnerable app. In other words, using this vulnerability, components of vulnerable apps
 can be accessed by third-party apps.
 
-**Skills Required (!)**
+## Skills Required (!)
 
 • Android
 
@@ -49,7 +47,7 @@ can be accessed by third-party apps.
 
 • Android Studio, VS Code
 
-**Skills Learned (!)**
+## Skills Learned (!)
 
 • Learn about the AAB format.
 
@@ -67,9 +65,9 @@ can be accessed by third-party apps.
 
 • Learn how to sign an APK.
 
-**Enumeration (!)**
+# Enumeration (!)
 
-**Analyzing the source code (\*)**
+## Analyzing the source code (*)
 
 Once the user unzips the file, they will find the app in AAB format (Android app bundle).
 AABs are a type of Android file used to publish and distribute Android apps. They are now the
@@ -81,16 +79,13 @@ Therefore, the first step is to grab the APK from the AAB file with the Bundle t
 
 ![](assets/image3.png)
 
-Once the rockets.apks file is generated, we need to **change the 
-file's extension from rockets.apks to rockets.zip:**
+Once the rockets.apks file is generated, we need to **change the file's extension from rockets.apks to rockets.zip:**
 
 ![](assets/image4.png)
 
 Unzip the rockets.zip file and the APK we need is the **universal.apk** inside the rockets folder.
 
-We can now install the APK to navigate in the app. The only screen we
-can see is the login which needs credentials, so there is nothing else
-to do here.
+We can now install the APK to navigate in the app. The only screen we can see is the login which needs credentials, so there is nothing else to do here.
 
 ![](assets/image5.png)
 
@@ -141,9 +136,9 @@ There is a piece of code at the end of the activity that defines a textView with
 There is also a hardcoded string there called "**secret**". We could try to work with this case but still, we do not have access to this
 activity to modify the code and check the results, as we are blocked by the login wall.
 
-**Solution (!)**
+# Solution (!)
 
-**Finding the vulnerability (\*)**
+## Finding the vulnerability (*)
 
 Let's take another approach and take a look at the AndroidManifest.xml file. Indeed, there are 3 activities declared there.
 If we look carefully there is an attribute **android:exported** declared on each activity. The android:exported attribute sets whether a 
@@ -157,11 +152,11 @@ The android:exported attribute seems to be declared as true in the Login Activit
 However, android:exported attribute has also been declared as true in Rockets Activity. **This means that we could bypass the login screen if we make an intent to 
 Rockets Activity directly.**
 
-**Exploitation (!)**
+## Exploitation (!)
 
 Therefore, the next step is to **create an attacker app that will send an intent to the vulnerable app.**
 
-**Creating the attacker app (\*)**
+### Creating the attacker app (\*)
 
 First, we open the Android studio and create a new project.
 
@@ -198,7 +193,7 @@ Nothing interesting on either screen. But if we analyze the details screen a bit
 
 Previously we found in the RocketDetailActivity a case that defined a textView3 with more details. **Thus, there is one more textView which is hidden.**
 
-**Getting the flag (!)**
+### Getting the flag (!)
 
 Let's work with the case we found in the Rocket Detail Activity previously:
 
